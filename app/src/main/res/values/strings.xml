@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">MyPWNode</string>
+    <string name="type_key">Type</string>
+    <string name="account_key">Account</string>
+    <string name="password_key">Password</string>
+    <string name="desc_key">Desc</string>
+    <string name="colon_key">:</string>
+    <string name="default_string">********</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="close">CLOSE</string>
+    <string name="main">Main</string>
+    <string name="add">Add</string>
+    <string name="setting">Setting</string>
+    <string name="exit">Exit</string>
+    <string name="type_cant_empty">Type can\'t be empty</string>
+    <string name="account_cant_empty">Account can\'t be empty</string>
+    <string name="password_cant_empty">Password can\'t be empty</string>
+    <string name="copy_account_success">Copy Account Success</string>
+    <string name="copy_password_success">Copy Password success</string>
+    <string name="copy_desc_success">Copy Desc Success</string>
+    <string name="confirm_password_faild">Input Password ERROR.Please Input again.</string>
+    <string name="two_password_not_equal">Twice Input Password Not Equal.Please Input again.</string>
+    <string name="new_password_cant_empty">Pleas input new password</string>
+    <string name="set_password_success">Set Password Success</string>
+    <string name="access_permission_denied">Access Permission Denied!</string>
+    <string name="setting_show_hover_menu">Show Hover Menu</string>
+    <string name="setting_open_password_protection">Open Password Protection</string>
+    <string name="setting_change_password">Change Password</string>
+    <string name="switch_on">ON</string>
+    <string name="switch_off">OFF</string>
+</resources>

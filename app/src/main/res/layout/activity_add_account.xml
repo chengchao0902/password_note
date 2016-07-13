@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/accountKeyView"
+            android:text="@string/type_key" />
+
+
+        <EditText
+            android:id="@+id/edittext_type"
+            style="@style/accountValueView" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/accountKeyView"
+            android:text="@string/account_key" />
+
+
+        <EditText
+            android:id="@+id/edittext_account"
+            style="@style/accountValueView" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/accountKeyView"
+            android:text="@string/password_key" />
+
+
+        <EditText
+            android:id="@+id/edittext_password"
+            style="@style/accountValueView" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/accountKeyView"
+            android:text="@string/desc_key" />
+
+
+        <EditText
+            android:id="@+id/edittext_desc"
+            style="@style/accountValueView" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/button_ok"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/white"
+            android:onClick="okCancelClicked"
+            android:text="@string/ok" />
+
+        <Button
+            android:id="@+id/button_cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/white"
+            android:onClick="okCancelClicked"
+            android:text="@string/cancel" />
+    </LinearLayout>
+</LinearLayout>

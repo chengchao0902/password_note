@@ -1,0 +1,87 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="accountKeyView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">right</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:paddingRight">10dp</item>
+    </style>
+
+    <style name="accountValueView">
+        <item name="android:textAppearance">?android:textAppearanceLarge</item>
+        <item name="android:layout_weight">4</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">left</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:paddingLeft">10dp</item>
+    </style>
+
+    <style name="accountLineLayout">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="copyView">
+        <item name="android:background">@drawable/copy</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_width">30dp</item>
+    </style>
+
+    <style name="horizontalLineView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@android:color/darker_gray</item>
+    </style>
+
+    <style name="verticalLineView">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@android:color/darker_gray</item>
+    </style>
+
+    <style name="menuViewItem">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:onClick">onMenuClick</item>
+        <item name="android:textColor">@android:color/holo_green_dark</item>
+    </style>
+
+    <style name="settingViewItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
+    <style name="switchView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textOn">@string/switch_on</item>
+        <item name="android:textOff">@string/switch_off</item>
+        <item name="android:onClick">switchClicked</item>
+    </style>
+
+    <style name="settingTextView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">4</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+    </style>
+</resources>

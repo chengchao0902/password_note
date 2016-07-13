@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textview_account_type"
+        style="@style/accountLineLayout"
+        android:gravity="center"
+        android:text="@string/default_string"
+        android:textAppearance="?android:textAppearanceLarge" />
+
+    <View
+        style="@style/horizontalLineView"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp" />
+
+    <LinearLayout style="@style/accountLineLayout">
+
+        <TextView
+            style="@style/accountKeyView"
+            android:text="@string/account_key" />
+
+        <View style="@style/verticalLineView" />
+
+        <TextView
+            android:id="@+id/textview_account"
+            style="@style/accountValueView"
+            android:text="@string/default_string" />
+
+        <View
+            android:id="@+id/view_copy_account"
+            style="@style/copyView"
+            android:onClick="copyAccount" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/accountLineLayout">
+
+        <TextView
+            style="@style/accountKeyView"
+            android:text="@string/password_key" />
+
+        <View style="@style/verticalLineView" />
+
+        <TextView
+            android:id="@+id/textview_password"
+            style="@style/accountValueView"
+            android:text="@string/default_string" />
+
+        <View
+            android:id="@+id/view_copy_password"
+            style="@style/copyView"
+            android:onClick="copyPassword" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_desc_parent"
+        style="@style/accountLineLayout">
+
+        <TextView
+            style="@style/accountKeyView"
+            android:text="@string/desc_key" />
+
+        <View style="@style/verticalLineView" />
+
+        <TextView
+            android:id="@+id/textview_desc"
+            style="@style/accountValueView"
+            android:text="@string/default_string" />
+
+        <View
+            android:id="@+id/view_copy_desc"
+            style="@style/copyView"
+            android:onClick="copyDesc" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_close_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:text="@string/close"
+        android:visibility="gone" />
+</LinearLayout>

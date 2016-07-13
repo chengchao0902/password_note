@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp"
+    android:orientation="vertical">
+
+
+    <LinearLayout style="@style/settingViewItem">
+
+        <TextView
+            style="@style/settingTextView"
+            android:text="@string/setting_show_hover_menu" />
+
+        <Switch
+            android:id="@+id/switch_show_hover_menu"
+            style="@style/switchView" />
+    </LinearLayout>
+
+    <View style="@style/horizontalLineView" />
+
+    <LinearLayout style="@style/settingViewItem">
+
+        <TextView
+            style="@style/settingTextView"
+            android:text="@string/setting_open_password_protection" />
+
+        <Switch
+            android:id="@+id/switch_open_password_protection"
+            style="@style/switchView" />
+    </LinearLayout>
+
+    <View style="@style/horizontalLineView" />
+
+    <LinearLayout style="@style/settingViewItem">
+
+        <TextView
+            android:onClick="changePassword"
+            style="@style/settingTextView"
+            android:text="@string/setting_change_password" />
+    </LinearLayout>
+</LinearLayout>
