@@ -26,14 +26,17 @@
     <View style="@style/horizontalLineView" />
 
     <TextView
+        android:id="@+id/textview_setting"
+        style="@style/menuViewItem"
+        android:text="@string/setting" />
+
+
+    <View style="@style/horizontalLineView" />
+
+
+    <TextView
         android:id="@+id/textview_exit"
         style="@style/menuViewItem"
         android:text="@string/exit" />
 
-    <View style="@style/horizontalLineView" />
-
-    <TextView
-        android:id="@+id/textview_setting"
-        style="@style/menuViewItem"
-        android:text="@string/setting" />
 </LinearLayout>

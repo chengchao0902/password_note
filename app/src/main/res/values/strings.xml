@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyPWNode</string>
+    <string name="app_name">Password Note</string>
     <string name="type_key">Type</string>
     <string name="account_key">Account</string>
     <string name="password_key">Password</string>
