@@ -115,4 +115,10 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@android:color/holo_green_light</item>
     </style>
+
+    <style name="functionView">
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:alpha">0.4</item>
+    </style>
 </resources>

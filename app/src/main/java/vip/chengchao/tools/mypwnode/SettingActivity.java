@@ -56,6 +56,9 @@ public class SettingActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             setOpenPasswordProtection(isOpenPasswordProtection() ? false : true);
+            if (!isOpenPasswordProtection() && !TextUtils.isEmpty(password)) {
+                accountStore.decode(password);
+            }
         }
         switchPasswordProtection.setChecked(isOpenPasswordProtection());
         super.onActivityResult(requestCode, resultCode, data);

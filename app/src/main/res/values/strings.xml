@@ -8,6 +8,9 @@
     <string name="default_string">********</string>
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
+    <string name="warn">Warn...</string>
+    <string name="delete_warn">Are you sure to DELETE?</string>
+    <string name="input_hint">Your input:</string>
     <string name="close">CLOSE</string>
     <string name="main">Main</string>
     <string name="add">Add</string>

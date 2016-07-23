@@ -91,8 +91,8 @@ public class DBAccountStore implements AccountDescStore {
     }
 
     @Override
-    public void del(String type, String account) {
-        database.delete(TABLE_NAME, COLUMN_TYPE + "=? and " + COLUMN_ACCOUNT + "=?", new String[]{type, account});
+    public int del(int id) {
+        return database.delete(TABLE_NAME, "id=?", new String[]{String.valueOf(id)});
     }
 
     @Override

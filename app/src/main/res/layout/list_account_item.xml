@@ -8,15 +8,11 @@
     <LinearLayout style="@style/accountLineLayout">
 
         <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/delete" />
-
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/ok"
+            android:id="@+id/view_delete_account"
+            style="@style/functionView"
+            android:background="@drawable/delete"
             android:visibility="gone" />
+
 
         <TextView
             android:id="@+id/textview_account_type"
@@ -28,16 +24,12 @@
             android:textAppearance="?android:textAppearanceLarge" />
 
         <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/edit" />
-
-
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/cancel"
+            android:id="@+id/view_edit"
+            style="@style/functionView"
+            android:background="@drawable/edit"
             android:visibility="gone" />
+
+
     </LinearLayout>
 
 

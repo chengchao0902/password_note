@@ -1,7 +1,7 @@
 package vip.chengchao.tools.mypwnode;
 
 import android.app.Activity;
-import android.app.NotificationManager;
+import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -9,12 +9,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
-import android.support.v7.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -29,6 +27,8 @@ import vip.chengchao.tools.mypwnode.store.DBAccountStore;
  */
 public class BaseActivity extends Activity {
     public static final String PASSWORD_KEY = "password";
+    private static final String KEY_SHOW_HOVER_MENU = "show_hover_menu";
+
     private static List<Activity> activities;
 
     protected static DBAccountStore accountStore;
@@ -74,7 +74,7 @@ public class BaseActivity extends Activity {
                 menuView = LayoutInflater.from(this).inflate(R.layout.menu_view, null);
                 moveTouchMenu = new MoveTouchMenu(this)
                         .setTouchView(R.layout.menu_flag)
-                        .addMenuView(menuView);
+                        .addMenuView(menuView).setBottom(200).setRight(200);
                 moveTouchMenu.show();
 
             }
@@ -115,8 +115,7 @@ public class BaseActivity extends Activity {
                 closeMenu();
                 break;
             case R.id.textview_add:
-                intent = new Intent(getApplicationContext(), AddActivity.class);
-                startActivity(intent);
+                AccountActivity.startActivityForAdd(this);
                 closeMenu();
                 break;
             case R.id.textview_exit:

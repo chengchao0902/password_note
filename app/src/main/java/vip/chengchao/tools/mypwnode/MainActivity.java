@@ -20,11 +20,18 @@ import vip.chengchao.tools.mypwnode.model.AccountDesc;
 
 public class MainActivity extends BaseActivity implements AdapterView.OnItemLongClickListener {
 
+    private String TAG = "MainActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         loadAccount(BaseActivity.password);
     }
 
@@ -55,7 +62,7 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemLong
                 accountDesc.setPassword(AES.decrypt(password, accountDesc.getPassword()));
             }
         }
-        listAdapter = new AccountListAdapter(this, accountDescs);
+        listAdapter = new AccountListAdapter(accountStore, this, accountDescs);
         listViewAccount.setAdapter(listAdapter);
         listViewAccount.setOnItemLongClickListener(this);
     }
@@ -83,6 +90,7 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemLong
 
     @Override
     public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Log.d(TAG, "On Item Long Click");
         view = listAdapter.getView(i, null, null);
         Button closeButton = (Button) view.findViewById(R.id.button_close_item);
         closeButton.setVisibility(View.VISIBLE);

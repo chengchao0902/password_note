@@ -45,6 +45,26 @@ public class MoveTouchMenu {
         manager.addView(touchView, layoutParams);
     }
 
+    public MoveTouchMenu setBottom(int b) {
+        showY = metrics.heightPixels - b;
+        return this;
+    }
+
+    public MoveTouchMenu setRight(int r) {
+        showX = metrics.widthPixels - r;
+        return this;
+    }
+
+    public MoveTouchMenu setTop(int t) {
+        showY = t;
+        return this;
+    }
+
+    public MoveTouchMenu setLeft(int l) {
+        showX = l;
+        return this;
+    }
+
     public MoveTouchMenu setXY(int x, int y) {
         this.showX = x;
         this.showY = y;

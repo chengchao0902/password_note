@@ -1,6 +1,7 @@
 package vip.chengchao.tools.mypwnode.cipher;
 
 import android.util.Base64;
+import android.util.Log;
 
 import java.security.InvalidKeyException;
 import java.security.SecureRandom;
@@ -27,17 +28,16 @@ public class AES {
      * @throws Exception
      */
     public static String encrypt(String key, String src) {
-        byte[] rawKey = new byte[0];
+        byte[] rawKey;
         try {
             rawKey = getRawKey(key);
             byte[] result = encrypt(rawKey, src.getBytes());
             return toHex(result);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Log.e(AES, "encrypt error,key:" + key + ",src=" + src);
+            return src;
         }
     }
-//rawkey -116 -84 59 -78
-    //resultbyte 66 -58 73 9 -127
 
     /**
      * 解密
@@ -48,14 +48,15 @@ public class AES {
      * @throws Exception
      */
     public static String decrypt(String key, String encrypted) {
-        byte[] rawKey = new byte[0];
+        byte[] rawKey;
         try {
             rawKey = getRawKey(key);
             byte[] enc = toByte(encrypted);
             byte[] result = decrypt(rawKey, enc);
             return new String(result);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Log.e(AES, "decrypt error,key=" + key + ",encrypted=" + encrypted);
+            return encrypted;
         }
 
     }

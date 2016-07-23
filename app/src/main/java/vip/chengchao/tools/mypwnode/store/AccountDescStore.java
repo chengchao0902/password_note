@@ -17,7 +17,7 @@ public interface AccountDescStore {
 
     void update(AccountDesc accountDesc);
 
-    void del(String type, String account);
+    int del(int id);
 
     List<AccountDesc> find(String type);
 
