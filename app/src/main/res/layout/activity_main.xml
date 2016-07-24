@@ -3,17 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#c8c8c8"
     tools:context="vip.chengchao.tools.mypwnode.MainActivity">
 
     <ListView
         android:id="@+id/listview_account"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#eeeeee"
+        android:background="@android:color/transparent"
         android:clipToPadding="false"
         android:divider="@android:color/transparent"
         android:dividerHeight="10dp"
-        android:padding="10dp"
+        android:paddingBottom="2dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="2dp"
         android:scrollbarStyle="outsideOverlay">
 
     </ListView>
