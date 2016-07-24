@@ -34,7 +34,7 @@ public class AES {
             byte[] result = encrypt(rawKey, src.getBytes());
             return toHex(result);
         } catch (Exception e) {
-            Log.e(AES, "encrypt error,key:" + key + ",src=" + src);
+            Log.e(AES, "encrypt error");
             return src;
         }
     }
@@ -55,7 +55,7 @@ public class AES {
             byte[] result = decrypt(rawKey, enc);
             return new String(result);
         } catch (Exception e) {
-            Log.e(AES, "decrypt error,key=" + key + ",encrypted=" + encrypted);
+            Log.e(AES, "decrypt error");
             return encrypted;
         }
 

@@ -2,28 +2,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="#00000000"
     android:orientation="vertical">
 
     <ImageView
         android:id="@+id/image_lock_menu"
         style="@style/menuViewItem" />
 
-    <View style="@style/horizontalLineView" />
+    <View
+        style="@style/horizontalLineView"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp" />
 
     <TextView
         android:id="@+id/textview_main"
         style="@style/menuViewItem"
         android:text="@string/main" />
 
-    <View style="@style/horizontalLineView" />
+    <View
+        style="@style/horizontalLineView"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp" />
 
     <TextView
         android:id="@+id/textview_add"
         style="@style/menuViewItem"
         android:text="@string/add" />
 
-    <View style="@style/horizontalLineView" />
+    <View
+        style="@style/horizontalLineView"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp" />
 
     <TextView
         android:id="@+id/textview_setting"
@@ -31,12 +40,27 @@
         android:text="@string/setting" />
 
 
-    <View style="@style/horizontalLineView" />
+    <View
+        style="@style/horizontalLineView"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp" />
 
 
     <TextView
         android:id="@+id/textview_exit"
         style="@style/menuViewItem"
         android:text="@string/exit" />
+
+    <View
+        style="@style/horizontalLineView"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp" />
+
+
+    <TextView
+        android:id="@+id/textview_hidden"
+        style="@style/menuViewItem"
+        android:text="@string/cancel" />
+
 
 </LinearLayout>

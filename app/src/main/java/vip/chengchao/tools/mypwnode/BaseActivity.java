@@ -36,7 +36,6 @@ public class BaseActivity extends Activity {
     protected static ClipboardManager clipboardManager;
     protected static MoveTouchMenu moveTouchMenu;
     protected static View menuView;
-    private boolean showHoverMenu = true;
     private boolean openPasswordProtection = true;
     protected static SharedPreferences sharedPreferences;
     protected static String md5Password;
@@ -52,13 +51,25 @@ public class BaseActivity extends Activity {
         if (!(this instanceof ProtectionActivity)) {
             if (isOpenPasswordProtection() && TextUtils.isEmpty(md5Password)) {
                 ProtectionActivity.startActivityForResult(this, ProtectionActivity.ACTION_CHANGE);
-                return;
+                finish();
             }
             if (isOpenPasswordProtection() && !TextUtils.isEmpty(md5Password) && TextUtils.isEmpty(BaseActivity.password)) {
                 ProtectionActivity.startActivityForResult(this, ProtectionActivity.ACTION_CONFIRM);
-                return;
+                finish();
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(this.getClass().getSimpleName(), "onResume");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(getClass().getSimpleName(), "onStart");
     }
 
     protected void initField() {
@@ -67,22 +78,29 @@ public class BaseActivity extends Activity {
             clipboardManager = clipboardManager == null ? (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE) : clipboardManager;
             sharedPreferences = sharedPreferences == null ? getSharedPreferences("setting", Context.MODE_PRIVATE) : sharedPreferences;
             activities = activities == null ? new ArrayList<Activity>() : activities;
-            showHoverMenu = sharedPreferences.getBoolean("show_hover_menu", showHoverMenu);
             openPasswordProtection = sharedPreferences.getBoolean("open_password_protection", openPasswordProtection);
-            //TODO showHoverMenu
-            if (moveTouchMenu == null) {
+            if (moveTouchMenu == null || moveTouchMenu.isDestroyed()) {
                 menuView = LayoutInflater.from(this).inflate(R.layout.menu_view, null);
                 moveTouchMenu = new MoveTouchMenu(this)
                         .setTouchView(R.layout.menu_flag)
-                        .addMenuView(menuView).setBottom(200).setRight(200);
+                        .addMenuView(menuView).setBottom(500).setRight(200);
                 moveTouchMenu.show();
 
             }
             md5Password = sharedPreferences.getString(PASSWORD_KEY, null);
             locked = TextUtils.isEmpty(password);
             lockImageView = (ImageView) menuView.findViewById(R.id.image_lock_menu);
+            setLockImageViewVisible();
             changeLockImageView();
             activities.add(this);
+        }
+    }
+
+    public void setLockImageViewVisible() {
+        if (openPasswordProtection) {
+            lockImageView.setVisibility(View.VISIBLE);
+        } else {
+            lockImageView.setVisibility(View.GONE);
         }
     }
 
@@ -118,8 +136,13 @@ public class BaseActivity extends Activity {
                 AccountActivity.startActivityForAdd(this);
                 closeMenu();
                 break;
+            case R.id.textview_hidden:
+                closeMenu();
+                break;
             case R.id.textview_exit:
                 closeMenu();
+                finishAll();
+                moveTouchMenu.destroy();
                 break;
             case R.id.textview_setting:
                 intent = new Intent(getApplicationContext(), SettingActivity.class);
@@ -150,7 +173,6 @@ public class BaseActivity extends Activity {
     @Override
     protected void onPause() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("show_hover_menu", showHoverMenu);
         editor.putBoolean("open_password_protection", openPasswordProtection);
         editor.commit();
         super.onPause();
@@ -175,15 +197,6 @@ public class BaseActivity extends Activity {
 
     protected CharSequence pasteFromClipboard() {
         return clipboardManager.getPrimaryClip().getItemAt(0).getText();
-    }
-
-
-    public boolean isShowHoverMenu() {
-        return showHoverMenu;
-    }
-
-    protected void setShowHoverMenu(boolean showHoverMenu) {
-        this.showHoverMenu = showHoverMenu;
     }
 
     public boolean isOpenPasswordProtection() {

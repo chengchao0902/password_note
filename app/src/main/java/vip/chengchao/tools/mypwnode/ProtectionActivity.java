@@ -1,5 +1,6 @@
 package vip.chengchao.tools.mypwnode;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,16 +16,19 @@ import vip.chengchao.tools.mypwnode.cipher.MD5;
  * Created by chengchao on 16/7/10.
  */
 public class ProtectionActivity extends BaseActivity {
+    public static final String ACTION_PROTECTION_SWITCH_COLSE = "protection_switch_close";
     public static final String ACTION_CONFIRM = "confirm_password";
     public static final String ACTION_CHANGE = "change_password";
     public static final String ACTION_LOCK = "screen_lock";
     public static final String ACTION_UNLOCK = "screen_unlock";
+    private static Activity fromActivity;
 
     /**
      * @param from   from Activity
      * @param action see ProtectionActivity.ACTION_CONFIRM and ProtectionActivity.ACTION_CHANGE
      */
     public static void startActivityForResult(Activity from, String action) {
+        fromActivity = from;
         Intent intent = new Intent(from, ProtectionActivity.class);
         intent.setAction(action);
         from.startActivityForResult(intent, 0);
@@ -74,6 +78,16 @@ public class ProtectionActivity extends BaseActivity {
         }
         locked = true;
         if (ACTION_CONFIRM.equals(action)) {
+            if (fromActivity == null) {
+                setResult(RESULT_OK);
+            } else {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+            }
+            finish();
+            return;
+        }
+        if (ACTION_PROTECTION_SWITCH_COLSE.equals(action)) {
             setResult(RESULT_OK);
             finish();
             return;

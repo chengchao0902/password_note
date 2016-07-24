@@ -19,6 +19,7 @@ import vip.chengchao.tools.mypwnode.R;
 public class MoveTouchMenu {
     private static final String TAG = "MoveTouchMenu";
     private static final int MIN_MOVED_DIST = 5;
+    private boolean destroyed = false;
     private Context context;
 
     private WindowManager.LayoutParams layoutParams;
@@ -127,7 +128,6 @@ public class MoveTouchMenu {
             manager.removeView(touchView);
         }
         if (menuView != null && menuView.isShown()) {
-
             manager.removeView(menuView);
         }
         layoutParams = null;
@@ -136,8 +136,12 @@ public class MoveTouchMenu {
         manager = null;
         context = null;
         metrics = null;
+        destroyed = true;
     }
 
+    public boolean isDestroyed() {
+        return destroyed;
+    }
 
     private View.OnTouchListener touchListener = new View.OnTouchListener() {
 

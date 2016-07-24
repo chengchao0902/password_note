@@ -11,7 +11,6 @@ import android.widget.Switch;
  */
 public class SettingActivity extends BaseActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,24 +18,18 @@ public class SettingActivity extends BaseActivity {
         initView();
     }
 
-    private Switch switchHoverMenu;
     private Switch switchPasswordProtection;
 
     private void initView() {
-        switchHoverMenu = (Switch) findViewById(R.id.switch_show_hover_menu);
         switchPasswordProtection = (Switch) findViewById(R.id.switch_open_password_protection);
-        switchHoverMenu.setChecked(isShowHoverMenu());
         switchPasswordProtection.setChecked(isOpenPasswordProtection());
     }
 
     public void switchClicked(View view) {
         switch (view.getId()) {
-            case R.id.switch_show_hover_menu:
-                setShowHoverMenu(isShowHoverMenu() ? false : true);
-                break;
             case R.id.switch_open_password_protection:
                 if (isOpenPasswordProtection()) {
-                    ProtectionActivity.startActivityForResult(this, ProtectionActivity.ACTION_CONFIRM);
+                    ProtectionActivity.startActivityForResult(this, ProtectionActivity.ACTION_PROTECTION_SWITCH_COLSE);
                     return;
                 }
                 if (TextUtils.isEmpty(md5Password)) {
@@ -44,6 +37,7 @@ public class SettingActivity extends BaseActivity {
                 } else {
                     setOpenPasswordProtection(true);
                 }
+                setLockImageViewVisible();
                 break;
         }
     }
@@ -60,6 +54,7 @@ public class SettingActivity extends BaseActivity {
                 accountStore.decode(password);
             }
         }
+        setLockImageViewVisible();
         switchPasswordProtection.setChecked(isOpenPasswordProtection());
         super.onActivityResult(requestCode, resultCode, data);
     }

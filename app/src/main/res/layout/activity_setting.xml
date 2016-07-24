@@ -10,19 +10,6 @@
 
         <TextView
             style="@style/settingTextView"
-            android:text="@string/setting_show_hover_menu" />
-
-        <Switch
-            android:id="@+id/switch_show_hover_menu"
-            style="@style/switchView" />
-    </LinearLayout>
-
-    <View style="@style/horizontalLineView" />
-
-    <LinearLayout style="@style/settingViewItem">
-
-        <TextView
-            style="@style/settingTextView"
             android:text="@string/setting_open_password_protection" />
 
         <Switch
@@ -35,8 +22,8 @@
     <LinearLayout style="@style/settingViewItem">
 
         <TextView
-            android:onClick="changePassword"
             style="@style/settingTextView"
+            android:onClick="changePassword"
             android:text="@string/setting_change_password" />
     </LinearLayout>
 </LinearLayout>
