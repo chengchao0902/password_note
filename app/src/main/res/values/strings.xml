@@ -15,6 +15,8 @@
     <string name="main">Main</string>
     <string name="add">Add</string>
     <string name="setting">Setting</string>
+    <string name="setting_export">Export</string>
+    <string name="setting_import">Import</string>
     <string name="exit">Exit</string>
     <string name="type_cant_empty">Type can\'t be empty</string>
     <string name="account_cant_empty">Account can\'t be empty</string>

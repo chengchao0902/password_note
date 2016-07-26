@@ -26,4 +26,26 @@
             android:onClick="changePassword"
             android:text="@string/setting_change_password" />
     </LinearLayout>
+
+    <View style="@style/horizontalLineView" />
+
+    <LinearLayout
+        style="@style/settingViewItem"
+        android:onClick="exportClick">
+
+        <TextView
+            style="@style/settingTextView"
+            android:text="@string/setting_export" />
+    </LinearLayout>
+
+    <View style="@style/horizontalLineView" />
+
+    <LinearLayout
+        style="@style/settingViewItem"
+        android:onClick="importClick">
+
+        <TextView
+            style="@style/settingTextView"
+            android:text="@string/setting_import" />
+    </LinearLayout>
 </LinearLayout>

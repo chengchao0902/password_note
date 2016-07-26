@@ -46,6 +46,14 @@ public class SettingActivity extends BaseActivity {
         ProtectionActivity.startActivityForResult(this, ProtectionActivity.ACTION_CHANGE);
     }
 
+    public void exportClick(View view) {
+        BackupActivity.startActivity(this, BackupActivity.ACTION_EXPORT);
+    }
+
+    public void importClick(View view) {
+        BackupActivity.startActivity(this, BackupActivity.ACTION_IMPORT);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
