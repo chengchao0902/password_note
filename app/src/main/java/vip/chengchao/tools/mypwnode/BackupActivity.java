@@ -22,13 +22,10 @@ public class BackupActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
-    private SDCardReader fileReader;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_backup);
-
         switchAction();
     }
 
