@@ -27,9 +27,7 @@ import vip.chengchao.tools.mypwnode.utils.SDCardReader;
  * Created by chengchao on 16/7/6.
  */
 public class BaseActivity extends Activity {
-    private static final String TAG = "BaseActivity";
     public static final String PASSWORD_KEY = "password";
-    private static final String KEY_SHOW_HOVER_MENU = "show_hover_menu";
 
     private static List<Activity> activities;
 
@@ -48,10 +46,6 @@ public class BaseActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SDCardReader fileReader = new SDCardReader();
-        for (String a : fileReader.list()) {
-            Log.i(TAG, a);
-        }
         initField();
         Log.i(this.getClass().getSimpleName(), "onCreate");
         if (!(this instanceof ProtectionActivity)) {

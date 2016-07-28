@@ -31,6 +31,13 @@
             android:onClick="forceClose" />
     </LinearLayout>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left|center_vertical"
+        android:onClick="clickRoot"
+        android:text="/sdcard" />
+
     <ListView
         android:id="@+id/listview_file_list"
         android:layout_width="match_parent"
@@ -40,9 +47,10 @@
     </ListView>
 
     <Button
+        android:id="@+id/button_select"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/darker_gray"
-        android:onClick="selectedBack"
+        android:onClick="selected"
         android:text="@string/ok" />
 </LinearLayout>

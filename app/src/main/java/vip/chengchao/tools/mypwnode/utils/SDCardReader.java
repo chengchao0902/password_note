@@ -6,24 +6,23 @@ import android.text.TextUtils;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.List;
 
 /**
  * Created by chengchao on 16/7/26.
  * <p/>
  * 必须需要 android.permission.WRITE_EXTERNAL_STORAGE
  * <p/>
- * TODO 完善
  */
 public class SDCardReader {
 
     public static final int TYPE_FILE = 1;
     public static final int TYPE_DIR = 2;
-    private static final String ROOT_NAME = "sdcard";
 
     private String rootPath;
     private File root;
     private File current;
-
+    private File[] children;
     private int type;
     private String extension;
 
@@ -51,13 +50,14 @@ public class SDCardReader {
         this.extension = extension;
     }
 
-    public String root() {
+    public File root() {
         current = root;
-        return ROOT_NAME;
+        return current;
     }
 
-    public String[] list() {
-        return current.list(filenameFilter);
+    public File[] list() {
+        children = current.listFiles(filenameFilter);
+        return children;
     }
 
     public void back() {
@@ -67,7 +67,15 @@ public class SDCardReader {
         current = current.getParentFile();
     }
 
-    public File select() {
+    public File select(int index) {
+        if (children == null || children.length == 0) return null;
+        if (index < 0 || index > children.length) return null;
+        current = children[index];
+        children = current.listFiles(filenameFilter);
+        return current;
+    }
+
+    public File current() {
         return current;
     }
 
@@ -75,16 +83,9 @@ public class SDCardReader {
         return current.getAbsolutePath().equals(root.getAbsolutePath());
     }
 
-    /**
-     * @return 将原sdcard的绝对路径替换为sdcard, 如果要获取文件绝对路径,调用
-     * @see #absolutePath()
-     */
-    public String path() {
-        return absolutePath().replace(rootPath, ROOT_NAME);
-    }
 
-    public String absolutePath() {
-        return current.getAbsolutePath();
+    public String rootPath() {
+        return rootPath;
     }
 
     private FilenameFilter filenameFilter = new FilenameFilter() {
@@ -92,7 +93,7 @@ public class SDCardReader {
         public boolean accept(File file, String name) {
             switch (type) {
                 case TYPE_FILE:
-                    return TextUtils.isEmpty(extension) || name.endsWith(extension);
+                    return TextUtils.isEmpty(extension) || file.isDirectory() || name.endsWith(extension);
                 case TYPE_DIR:
                     return file.isDirectory();
                 default:
