@@ -5,6 +5,7 @@ import android.os.Environment;
 import android.text.TextUtils;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FilenameFilter;
 import java.util.List;
 
@@ -56,7 +57,7 @@ public class SDCardReader {
     }
 
     public File[] list() {
-        children = current.listFiles(filenameFilter);
+        children = current.listFiles(fileFilter);
         return children;
     }
 
@@ -71,12 +72,16 @@ public class SDCardReader {
         if (children == null || children.length == 0) return null;
         if (index < 0 || index > children.length) return null;
         current = children[index];
-        children = current.listFiles(filenameFilter);
+        children = current.listFiles(fileFilter);
         return current;
     }
 
     public File current() {
         return current;
+    }
+
+    public String getReplacedPath(String replacement) {
+        return current.getAbsolutePath().replace(rootPath, replacement);
     }
 
     public boolean isRoot() {
@@ -88,9 +93,10 @@ public class SDCardReader {
         return rootPath;
     }
 
-    private FilenameFilter filenameFilter = new FilenameFilter() {
+    private FileFilter fileFilter = new FileFilter() {
         @Override
-        public boolean accept(File file, String name) {
+        public boolean accept(File file) {
+            String name = file.getName();
             switch (type) {
                 case TYPE_FILE:
                     return TextUtils.isEmpty(extension) || file.isDirectory() || name.endsWith(extension);
@@ -99,8 +105,8 @@ public class SDCardReader {
                 default:
                     return true;
             }
-
         }
+
     };
 
 }

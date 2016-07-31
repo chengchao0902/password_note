@@ -15,6 +15,7 @@ public class BackupActivity extends BaseActivity {
     private static final String TAG = "BackupActivity";
     public static final String ACTION_EXPORT = "export";
     public static final String ACTION_IMPORT = "import";
+    private static final String BAK_EXTENSION = "pw";
 
     public static void startActivity(Context context, String action) {
         Intent intent = new Intent(context, BackupActivity.class);
@@ -32,14 +33,15 @@ public class BackupActivity extends BaseActivity {
     protected void switchAction() {
         switch (getIntent().getAction()) {
             case ACTION_IMPORT:
+                FileSelectActivity.openFileSelectorForResult(this, BAK_EXTENSION, 0);
                 importBackup();
                 break;
             case ACTION_EXPORT:
+                FileSelectActivity.openDirSelectorForResult(this, 0);
                 exportBackup();
                 break;
-            default:
-                finish();
         }
+        finish();
     }
 
     protected String selectBy(String action) {
@@ -51,6 +53,12 @@ public class BackupActivity extends BaseActivity {
     }
 
     protected void importBackup() {
+        //TODO
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         //TODO
     }
 }

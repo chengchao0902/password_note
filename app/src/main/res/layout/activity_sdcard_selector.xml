@@ -17,7 +17,7 @@
             android:onClick="back" />
 
         <TextView
-            android:id="@+id/textview_path"
+            android:id="@+id/textview_path_show"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -34,9 +34,9 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="left|center_vertical"
+        android:gravity="center"
         android:onClick="clickRoot"
-        android:text="/sdcard" />
+        android:text="@string/sdcard" />
 
     <ListView
         android:id="@+id/listview_file_list"

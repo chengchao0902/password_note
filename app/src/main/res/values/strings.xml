@@ -17,7 +17,10 @@
     <string name="setting">Setting</string>
     <string name="setting_export">Export</string>
     <string name="setting_import">Import</string>
+    <string name="sdcard">sdcard</string>
     <string name="exit">Exit</string>
+    <string name="are_you_sure_select_file">Are you sure select this file?</string>
+    <string name="are_you_sure_select_dir">Are you sure select this directory?</string>
     <string name="type_cant_empty">Type can\'t be empty</string>
     <string name="account_cant_empty">Account can\'t be empty</string>
     <string name="password_cant_empty">Password can\'t be empty</string>
