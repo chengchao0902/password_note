@@ -1,10 +1,15 @@
 package vip.chengchao.tools.mypwnode;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import java.io.File;
+
+import vip.chengchao.tools.mypwnode.utils.Backup;
+import vip.chengchao.tools.mypwnode.utils.FileUtils;
 import vip.chengchao.tools.mypwnode.utils.SDCardReader;
 
 /**
@@ -23,42 +28,66 @@ public class BackupActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
+    private String action;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_backup);
+        action = getIntent().getAction();
         switchAction();
     }
 
     protected void switchAction() {
-        switch (getIntent().getAction()) {
+        switch (action) {
             case ACTION_IMPORT:
                 FileSelectActivity.openFileSelectorForResult(this, BAK_EXTENSION, 0);
-                importBackup();
                 break;
             case ACTION_EXPORT:
                 FileSelectActivity.openDirSelectorForResult(this, 0);
-                exportBackup();
                 break;
         }
-        finish();
     }
 
     protected String selectBy(String action) {
         return null;
     }
 
-    protected void exportBackup() {
-        //TODO
-    }
-
-    protected void importBackup() {
-        //TODO
+    protected String getExportFileName() {
+        return getApplicationInfo().loadLabel(getPackageManager()).toString() + "_" + System.currentTimeMillis() + "." + BAK_EXTENSION;
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        //TODO
+        if (resultCode != RESULT_OK) {
+            toast("failed");//TODO 改为strings文件
+            finish();
+            return;
+        }
+        ProgressDialog dialog = new ProgressDialog(this);
+        dialog.setCancelable(false);
+        String path = data.getStringExtra(FileSelectActivity.KEY_FILE_PATH);
+        boolean result = false;
+        Backup backup;
+        switch (action) {
+            case ACTION_EXPORT:
+                dialog.setMessage("export");
+                dialog.show();
+                backup = Backup.createExport(path + "/" + getExportFileName());
+                break;
+            case ACTION_IMPORT:
+                dialog.setMessage("export");
+                dialog.show();
+                backup = Backup.createImport(path);
+                break;
+        }
+        dialog.dismiss();
+        if (result) {//TODO 改为strings文件
+            toast("success");
+        } else {
+            toast("failed");
+        }
+        finish();
     }
 }
