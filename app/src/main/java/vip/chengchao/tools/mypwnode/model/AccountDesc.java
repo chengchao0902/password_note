@@ -88,4 +88,17 @@ public class AccountDesc {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    @Override
+    public String toString() {
+        return "AccountDesc{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", account='" + account + '\'' +
+                ", password='" + password + '\'' +
+                ", desc='" + desc + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }

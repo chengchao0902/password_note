@@ -20,7 +20,7 @@ public class BackupActivity extends BaseActivity {
     private static final String TAG = "BackupActivity";
     public static final String ACTION_EXPORT = "export";
     public static final String ACTION_IMPORT = "import";
-    private static final String BAK_EXTENSION = "pw";
+    private static final String BAK_EXTENSION = "txt";
 
     public static void startActivity(Context context, String action) {
         Intent intent = new Intent(context, BackupActivity.class);
@@ -49,10 +49,6 @@ public class BackupActivity extends BaseActivity {
         }
     }
 
-    protected String selectBy(String action) {
-        return null;
-    }
-
     protected String getExportFileName() {
         return getApplicationInfo().loadLabel(getPackageManager()).toString() + "_" + System.currentTimeMillis() + "." + BAK_EXTENSION;
     }
@@ -67,19 +63,19 @@ public class BackupActivity extends BaseActivity {
         }
         ProgressDialog dialog = new ProgressDialog(this);
         dialog.setCancelable(false);
+        dialog.setMessage(action);
+        dialog.show();
         String path = data.getStringExtra(FileSelectActivity.KEY_FILE_PATH);
         boolean result = false;
         Backup backup;
         switch (action) {
             case ACTION_EXPORT:
-                dialog.setMessage("export");
-                dialog.show();
-                backup = Backup.createExport(path + "/" + getExportFileName());
+                backup = Backup.create(path + "/" + getExportFileName(), password, accountStore);
+                result = backup.export();
                 break;
             case ACTION_IMPORT:
-                dialog.setMessage("export");
-                dialog.show();
-                backup = Backup.createImport(path);
+                backup = Backup.create(path, password, accountStore);
+                result = backup.import$();
                 break;
         }
         dialog.dismiss();
