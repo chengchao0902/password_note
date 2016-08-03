@@ -20,6 +20,10 @@ public class Backup {
 
     private static final String TAG = "Backup";
     private static final String LINE_SEPARATOR = "#################################";
+    private static final String KEY_TYPE = "type:";
+    private static final String KEY_ACCOUNT = "account:";
+    private static final String KEY_PASSWORD = "password:";
+    private static final String KEY_DESC = "desc:";
 
     public static Backup create(String path, String password, AccountDescStore store) {
         return new Backup(path, password, store);
@@ -41,10 +45,10 @@ public class Backup {
         for (AccountDesc accountDesc : accountDescs) {
             accountDesc.setAccount(AES.decrypt(password, accountDesc.getAccount()));
             accountDesc.setPassword(AES.decrypt(password, accountDesc.getPassword()));
-            builder.append("type:").append(accountDesc.getType()).append("\n");
-            builder.append("account:").append(accountDesc.getAccount()).append("\n");
-            builder.append("password:").append(accountDesc.getPassword()).append("\n");
-            builder.append("desc:").append(accountDesc.getDesc()).append("\n");
+            builder.append(KEY_TYPE).append(accountDesc.getType()).append("\n");
+            builder.append(KEY_ACCOUNT).append(accountDesc.getAccount()).append("\n");
+            builder.append(KEY_PASSWORD).append(accountDesc.getPassword()).append("\n");
+            builder.append(KEY_DESC).append(accountDesc.getDesc()).append("\n");
             builder.append(LINE_SEPARATOR).append("\n");
         }
         FileOutputStream outputStream = null;
@@ -83,19 +87,21 @@ public class Backup {
                     filedCount = 0;
                     continue;
                 }
-                if (line.startsWith("type:")) {
+                if (line.startsWith(KEY_TYPE)) {
                     filedCount++;
                     accountDesc = new AccountDesc();
-                    accountDesc.setType(line.replace("type:", ""));
-                } else if (line.startsWith("account:")) {
+                    accountDesc.setType(line.replace(KEY_TYPE, ""));
+                } else if (line.startsWith(KEY_ACCOUNT)) {
                     filedCount++;
-                    accountDesc.setAccount(line.replace("account:", ""));
-                } else if (line.startsWith("password:")) {
+                    String account = line.replace(KEY_ACCOUNT, "");
+                    accountDesc.setAccount(AES.decrypt(password, account));
+                } else if (line.startsWith(KEY_PASSWORD)) {
                     filedCount++;
-                    accountDesc.setPassword(line.replace("password:", ""));
-                } else if (line.startsWith("desc:")) {
+                    String aPassword = line.replace(KEY_PASSWORD, "");
+                    accountDesc.setPassword(AES.decrypt(password, aPassword));
+                } else if (line.startsWith(KEY_DESC)) {
                     filedCount++;
-                    accountDesc.setDesc(line.replace("desc:", ""));
+                    accountDesc.setDesc(line.replace(KEY_DESC, ""));
                 }
             }
         } catch (Exception e) {

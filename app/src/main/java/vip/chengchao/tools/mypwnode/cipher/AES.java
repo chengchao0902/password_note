@@ -28,6 +28,7 @@ public class AES {
      * @throws Exception
      */
     public static String encrypt(String key, String src) {
+        if (key == null || key.isEmpty()) return src;
         byte[] rawKey;
         try {
             rawKey = getRawKey(key);
@@ -48,6 +49,7 @@ public class AES {
      * @throws Exception
      */
     public static String decrypt(String key, String encrypted) {
+        if (key == null || key.isEmpty()) return encrypted;
         byte[] rawKey;
         try {
             rawKey = getRawKey(key);

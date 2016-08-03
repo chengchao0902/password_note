@@ -4,18 +4,20 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-
-import java.io.File;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.TextView;
 
 import vip.chengchao.tools.mypwnode.utils.Backup;
-import vip.chengchao.tools.mypwnode.utils.FileUtils;
-import vip.chengchao.tools.mypwnode.utils.SDCardReader;
+
 
 /**
  * Created by chengchao on 16/7/25.
  */
-public class BackupActivity extends BaseActivity {
+public class BackupActivity extends BaseActivity implements CompoundButton.OnCheckedChangeListener {
 
     private static final String TAG = "BackupActivity";
     public static final String ACTION_EXPORT = "export";
@@ -29,16 +31,28 @@ public class BackupActivity extends BaseActivity {
     }
 
     private String action;
+    private EditText editBackupPassword;
+    private RadioButton cipherRadio;
+    private RadioButton clearRadio;
+    private TextView textBackupTitle;
+    private String backupPassword;
+    private boolean isNeedPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_backup);
+        editBackupPassword = (EditText) findViewById(R.id.edit_backup_password);
+        textBackupTitle = (TextView) findViewById(R.id.text_backup_title);
+        cipherRadio = (RadioButton) findViewById(R.id.radio_cipher);
+        clearRadio = (RadioButton) findViewById(R.id.radio_clear);
+        cipherRadio.setOnCheckedChangeListener(this);
+        clearRadio.setOnCheckedChangeListener(this);
         action = getIntent().getAction();
-        switchAction();
+        textBackupTitle.setText(action);
     }
 
-    protected void switchAction() {
+    protected void startAction() {
         switch (action) {
             case ACTION_IMPORT:
                 FileSelectActivity.openFileSelectorForResult(this, BAK_EXTENSION, 0);
@@ -49,6 +63,15 @@ public class BackupActivity extends BaseActivity {
         }
     }
 
+    public void backupOk(View view) {
+        backupPassword = editBackupPassword.getText().toString();
+        if (isNeedPassword && TextUtils.isEmpty(backupPassword)) {
+            toast(R.string.password_cant_empty);
+            return;
+        }
+        startAction();
+    }
+
     protected String getExportFileName() {
         return getApplicationInfo().loadLabel(getPackageManager()).toString() + "_" + System.currentTimeMillis() + "." + BAK_EXTENSION;
     }
@@ -57,7 +80,7 @@ public class BackupActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != RESULT_OK) {
-            toast("failed");//TODO 改为strings文件
+            toast(R.string.failed);
             finish();
             return;
         }
@@ -70,20 +93,44 @@ public class BackupActivity extends BaseActivity {
         Backup backup;
         switch (action) {
             case ACTION_EXPORT:
-                backup = Backup.create(path + "/" + getExportFileName(), password, accountStore);
+                backup = Backup.create(path + "/" + getExportFileName(), backupPassword, accountStore);
                 result = backup.export();
                 break;
             case ACTION_IMPORT:
-                backup = Backup.create(path, password, accountStore);
+                backup = Backup.create(path, backupPassword, accountStore);
                 result = backup.import$();
                 break;
         }
         dialog.dismiss();
-        if (result) {//TODO 改为strings文件
-            toast("success");
+        if (result) {
+            toast(R.string.success);
         } else {
-            toast("failed");
+            toast(R.string.failed);
         }
         finish();
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        switch (action) {
+            case ACTION_EXPORT:
+                if (compoundButton.getId() == R.id.radio_clear && b) {
+                    isNeedPassword = true;
+                    editBackupPassword.setVisibility(View.VISIBLE);
+                } else if (compoundButton.getId() == R.id.radio_clear) {
+                    isNeedPassword = false;
+                    editBackupPassword.setVisibility(View.GONE);
+                }
+                break;
+            case ACTION_IMPORT:
+                if (compoundButton.getId() == R.id.radio_cipher && b) {
+                    isNeedPassword = true;
+                    editBackupPassword.setVisibility(View.VISIBLE);
+                } else if (compoundButton.getId() == R.id.radio_cipher) {
+                    isNeedPassword = false;
+                    editBackupPassword.setVisibility(View.GONE);
+                }
+                break;
+        }
     }
 }

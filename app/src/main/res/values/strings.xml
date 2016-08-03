@@ -17,6 +17,11 @@
     <string name="setting">Setting</string>
     <string name="setting_export">Export</string>
     <string name="setting_import">Import</string>
+    <string name="cipher_text">Cipher Text</string>
+    <string name="clear_text">Clear Text</string>
+    <string name="success">Success</string>
+    <string name="failed">Failed</string>
+    <string name="space"> </string>
     <string name="sdcard">sdcard</string>
     <string name="exit">Exit</string>
     <string name="are_you_sure_select_file">Are you sure select this file?</string>
