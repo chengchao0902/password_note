@@ -28,7 +28,8 @@ import vip.chengchao.tools.mypwnode.utils.SDCardReader;
  */
 public class BaseActivity extends Activity {
     public static final String PASSWORD_KEY = "password";
-
+    private static final String PROTECTION_KEY = "open_password_protection";
+    private static final String SETTING_KEY = "setting";
     private static List<Activity> activities;
 
     protected static DBAccountStore accountStore;
@@ -47,7 +48,6 @@ public class BaseActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initField();
-        Log.i(this.getClass().getSimpleName(), "onCreate");
         if (!(this instanceof ProtectionActivity)) {
             if (isOpenPasswordProtection() && TextUtils.isEmpty(md5Password)) {
                 ProtectionActivity.startActivityForResult(this, ProtectionActivity.ACTION_CHANGE);
@@ -60,40 +60,25 @@ public class BaseActivity extends Activity {
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(this.getClass().getSimpleName(), "onResume");
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d(getClass().getSimpleName(), "onStart");
-    }
-
     protected void initField() {
-        synchronized (BaseActivity.class) {
-            accountStore = accountStore == null ? new DBAccountStore(this) : accountStore;
-            clipboardManager = clipboardManager == null ? (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE) : clipboardManager;
-            sharedPreferences = sharedPreferences == null ? getSharedPreferences("setting", Context.MODE_PRIVATE) : sharedPreferences;
-            activities = activities == null ? new ArrayList<Activity>() : activities;
-            openPasswordProtection = sharedPreferences.getBoolean("open_password_protection", openPasswordProtection);
-            if (moveTouchMenu == null || moveTouchMenu.isDestroyed()) {
-                menuView = LayoutInflater.from(this).inflate(R.layout.menu_view, null);
-                moveTouchMenu = new MoveTouchMenu(this)
-                        .setTouchView(R.layout.menu_flag)
-                        .addMenuView(menuView).setBottom(500).setRight(200);
-                moveTouchMenu.show();
-
-            }
-            md5Password = sharedPreferences.getString(PASSWORD_KEY, null);
-            locked = TextUtils.isEmpty(password);
-            lockImageView = (ImageView) menuView.findViewById(R.id.image_lock_menu);
-            setLockImageViewVisible();
-            changeLockImageView();
-            activities.add(this);
+        accountStore = accountStore == null ? new DBAccountStore(this) : accountStore;
+        clipboardManager = clipboardManager == null ? (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE) : clipboardManager;
+        sharedPreferences = sharedPreferences == null ? getSharedPreferences(SETTING_KEY, Context.MODE_PRIVATE) : sharedPreferences;
+        activities = activities == null ? new ArrayList<Activity>() : activities;
+        openPasswordProtection = sharedPreferences.getBoolean(PROTECTION_KEY, openPasswordProtection);
+        if (moveTouchMenu == null || moveTouchMenu.isDestroyed()) {
+            menuView = LayoutInflater.from(this).inflate(R.layout.menu_view, null);
+            moveTouchMenu = new MoveTouchMenu(this)
+                    .setTouchView(R.layout.menu_flag)
+                    .addMenuView(menuView).setBottom(500).setRight(200);
+            moveTouchMenu.show();
         }
+        md5Password = sharedPreferences.getString(PASSWORD_KEY, null);
+        locked = TextUtils.isEmpty(password);
+        lockImageView = (ImageView) menuView.findViewById(R.id.image_lock_menu);
+        setLockImageViewVisible();
+        changeLockImageView();
+        activities.add(this);
     }
 
     public void setLockImageViewVisible() {
@@ -173,8 +158,8 @@ public class BaseActivity extends Activity {
     @Override
     protected void onPause() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("open_password_protection", openPasswordProtection);
-        editor.commit();
+        editor.putBoolean(PROTECTION_KEY, openPasswordProtection);
+        editor.apply();
         super.onPause();
     }
 

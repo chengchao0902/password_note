@@ -50,6 +50,7 @@ public class BackupActivity extends BaseActivity implements CompoundButton.OnChe
         clearRadio.setOnCheckedChangeListener(this);
         action = getIntent().getAction();
         textBackupTitle.setText(action);
+        cipherRadio.setChecked(true);
     }
 
     protected void startAction() {
@@ -120,6 +121,8 @@ public class BackupActivity extends BaseActivity implements CompoundButton.OnChe
                 } else if (compoundButton.getId() == R.id.radio_clear) {
                     isNeedPassword = false;
                     editBackupPassword.setVisibility(View.GONE);
+                } else {
+                    isNeedPassword = false;
                 }
                 break;
             case ACTION_IMPORT:
@@ -129,6 +132,8 @@ public class BackupActivity extends BaseActivity implements CompoundButton.OnChe
                 } else if (compoundButton.getId() == R.id.radio_cipher) {
                     isNeedPassword = false;
                     editBackupPassword.setVisibility(View.GONE);
+                } else {
+                    isNeedPassword = false;
                 }
                 break;
         }

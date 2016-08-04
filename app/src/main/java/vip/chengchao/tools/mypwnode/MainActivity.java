@@ -90,7 +90,6 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemLong
 
     @Override
     public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Log.d(TAG, "On Item Long Click");
         view = listAdapter.getView(i, null, null);
         Button closeButton = (Button) view.findViewById(R.id.button_close_item);
         closeButton.setVisibility(View.VISIBLE);
